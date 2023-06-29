@@ -44,4 +44,42 @@ export class DecipherCommandsUseCase {
 
         return commands
     }
+
+    private isToJump(jumps: number) {
+
+        return jumps >= 1
+
+    }
+
+    private async returnValueNumber(command: string, index: number) {
+        const value = command.substring(index)
+
+        return Number(value)
+    }
+
+    async executeCommands(commands: string[]) {
+
+        let endereco = 0
+        let jumps = 0
+
+        for (const command of commands) {
+
+            if (this.isToJump(jumps)) {
+                jumps--
+                continue
+            }
+
+            else if (command.startsWith('20')) {
+
+                endereco += await this.returnValueNumber(command, 2)
+            }
+            else if (command.startsWith('5')) {
+
+                jumps = await this.returnValueNumber(command, 1) - 1
+            }
+
+        }
+
+        return endereco
+    }
 }
