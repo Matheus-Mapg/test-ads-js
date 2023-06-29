@@ -11,5 +11,35 @@ export class DecipherCommandsService {
 
         const commands = await this.usecase.extractCommands(file)
 
+        let endereco = 0
+        let jumps = 0
+
+        for (const command of commands) {
+
+            if (jumps >= 1) {
+                jumps--
+
+                continue
+            }
+
+            else if (command.startsWith('20')) {
+                const value = command.substring(2)
+
+                endereco += Number(value)
+            }
+            else if (command.startsWith('5')) {
+                const value = command.substring(1)
+
+                jumps = Number(value) - 1
+            }
+
+        }
+
+        return {
+            error: false,
+            message: 'sucess',
+            data: endereco
+        }
+
     }
 }

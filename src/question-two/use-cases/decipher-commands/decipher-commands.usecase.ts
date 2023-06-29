@@ -35,6 +35,7 @@ export class DecipherCommandsUseCase {
 
         return commands
     }
+
     async extractCommands(file: MulterFile) {
 
         const text = await this.readFileMulter(file)
