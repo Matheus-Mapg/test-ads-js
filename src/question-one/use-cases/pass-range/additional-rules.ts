@@ -7,6 +7,7 @@ export class AdditionalRules extends PassRangeUsecase {
     protected async isAdjacentEqual(pass: string[]): Promise<boolean> {
 
         let isAdjacents = false
+        let cancel = false
 
         for (let index = 0; index < pass.length; index++) {
             const digitActual = pass[index];
@@ -14,15 +15,27 @@ export class AdditionalRules extends PassRangeUsecase {
 
             const containDigits = digitActual && digitNext
 
-            const groupsTwoAdjacents = pass.filter(e => e == digitActual).length <= 2 || pass.filter(e => e == digitActual).length % 2 == 0
+            const adjacents = containDigits && digitActual == digitNext
 
-            const adjacents = digitActual == digitNext
+            const countNumbers = pass.filter(e => e == digitActual).length
 
-            if (containDigits && adjacents) {
+            const groupsTwoAdjacents = countNumbers <= 2 || countNumbers % 2 == 0
+
+            if (adjacents) {
                 isAdjacents = true
             }
             else if (!groupsTwoAdjacents) {
-                return false
+                const countNextNumbers = pass.filter(e => e == pass[index + countNumbers]).length
+
+                const nextNumber = pass.filter(e => e == pass[index + 1]).length
+
+                const nextGroupsTwoAdjacents = countNextNumbers % 2 == 0 && pass[index + countNumbers] || nextNumber % 2 == 0 && pass[index + countNumbers]
+
+                if (nextGroupsTwoAdjacents) {
+                    cancel = true
+                }
+                else if (!cancel)
+                    return false
             }
         }
 
