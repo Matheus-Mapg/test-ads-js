@@ -1,4 +1,4 @@
-import { PassRangeUsecase } from "./pass-range/pass-range.usecase";
+import { PassRangeUsecase } from "./pass-range.usecase";
 
 export class PassRangeTest extends PassRangeUsecase {
 
