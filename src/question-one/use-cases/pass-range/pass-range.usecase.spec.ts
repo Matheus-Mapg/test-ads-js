@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AdditionalRulesTest } from './additional-rules.test';
-import { PassRangeTest } from './pass-range.test';
+import { AdditionalRulesTest } from './additional-rules.mock';
+import { PassRangeTest } from './pass-range.mock';
 
 describe('PassRangeUsecase', () => {
   let provider: PassRangeTest;
