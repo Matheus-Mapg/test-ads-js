@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { IPassRangeType } from '../../../question-one/data/types/pass-range/ipass-range.type';
 
 @Injectable()
-export class PassRangeUsecase {
+export class PassRangeUsecase extends IPassRangeType {
 
     async separetedDigits(pass: number) {
         return pass.toString().split('')
