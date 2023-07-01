@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { AdditionalRules } from 'src/question-one/use-cases/pass-range/additional-rules';
-import { PassRangeUsecase } from 'src/question-one/use-cases/pass-range/pass-range.usecase';
+import { AdditionalRules } from '../../../question-one/use-cases/pass-range/additional-rules';
+import { PassRangeUsecase } from '../../../question-one/use-cases/pass-range/pass-range.usecase';
 
 @Injectable()
 export class PassRangeService {

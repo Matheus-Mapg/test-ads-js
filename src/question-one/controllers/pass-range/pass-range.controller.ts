@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import { PassRangeService } from 'src/question-one/services/pass-range/pass-range.service';
+import { PassRangeService } from '../../../question-one/services/pass-range/pass-range.service';
 
 @Controller('pass-range')
 export class PassRangeController {

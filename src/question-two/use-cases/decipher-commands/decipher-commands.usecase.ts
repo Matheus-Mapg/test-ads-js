@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { readFile, unlink, writeFile } from 'fs/promises';
 import { cwd } from 'process';
-import { MulterFile } from 'src/question-two/data/types/multer-file/multer-file';
+import { MulterFile } from '../../../question-two/data/types/multer-file/multer-file.type';
 
 @Injectable()
 export class DecipherCommandsUseCase {
