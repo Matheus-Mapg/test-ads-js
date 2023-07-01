@@ -19,6 +19,7 @@ export class DecipherCommandsUseCase {
         return text
     }
 
+    // Método para separar os comandos e garantir que sejam números
     private async splitCommands(text: string) {
         const returnLines = text.split('\n')
 
