@@ -49,14 +49,34 @@ describe('DecipherCommands', () => {
     }
   });
 
-  afterAll(async () => {
-    await unlink(`${cwd()}/commands.txt`)
+  afterEach(async () => {
+    try {
+      var read = await readFile(`${cwd()}/commands.txt`)
+
+    } catch (error) {
+
+    }
+
+    read && (await unlink(`${cwd()}/commands.txt`))
   })
 
   it('should be defined', () => {
     expect(provider).toBeDefined();
   });
 
-  test.todo('Extrair comandos do arquivo txt')
-  test.todo('Executar comandos para obter o endereço de número 3')
+  it('Extrair comandos do arquivo txt', async () => {
+    const result = await provider.extractCommands(file)
+
+    expect(result).toHaveLength(9)
+  })
+
+  it('Executar comandos para obter o endereço de número 3', async () => {
+
+    const commands = ['25', '52', '53', '202', '54', '402', '203', '510', '201']
+
+    const result = await provider.executeCommands(commands)
+
+    expect(result).toEqual(3)
+  })
+
 });
