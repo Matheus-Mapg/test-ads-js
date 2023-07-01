@@ -1,6 +1,6 @@
 import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { MulterFile } from 'src/question-two/data/types/multer-file/multer-file';
+import { MulterFile } from 'src/question-two/data/types/multer-file/multer-file.type';
 import { DecipherCommandsService } from 'src/question-two/services/decipher-commands/decipher-commands.service';
 
 @Controller('decipher-commands')
