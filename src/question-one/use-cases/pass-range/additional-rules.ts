@@ -6,32 +6,23 @@ export class AdditionalRules extends PassRangeUsecase {
 
     protected async isAdjacentEqual(pass: string[]): Promise<boolean> {
 
-        let isAdjacents = false
+        let isAdjacentEqual = false
         let cancel = false
 
         for (let index = 0; index < pass.length; index++) {
-            const digitActual = pass[index];
-            const digitNext = pass[index + 1];
 
-            const containDigits = digitActual && digitNext
+            const isAdjacent = await this.isAdjacents(pass[index], pass[index + 1])
 
-            const adjacents = containDigits && digitActual == digitNext
+            const isGroupsAdjacent = await this.isGroupsAdjacent(pass[index], pass)
 
-            const countNumbers = pass.filter(e => e == digitActual).length
-
-            const groupsTwoAdjacents = countNumbers <= 2 || countNumbers % 2 == 0
-
-            if (adjacents) {
-                isAdjacents = true
+            if (isAdjacent) {
+                isAdjacentEqual = true
             }
-            else if (!groupsTwoAdjacents) {
-                const countNextNumbers = pass.filter(e => e == pass[index + countNumbers]).length
+            else if (!isGroupsAdjacent) {
 
-                const nextNumber = pass.filter(e => e == pass[index + 1]).length
+                const exceptionRepetition = await this.exceptionRepetition(pass, index)
 
-                const nextGroupsTwoAdjacents = countNextNumbers % 2 == 0 && pass[index + countNumbers] || nextNumber % 2 == 0 && pass[index + countNumbers]
-
-                if (nextGroupsTwoAdjacents) {
+                if (exceptionRepetition) {
                     cancel = true
                 }
                 else if (!cancel)
@@ -39,6 +30,34 @@ export class AdditionalRules extends PassRangeUsecase {
             }
         }
 
-        return isAdjacents
+        return isAdjacentEqual
+    }
+
+    private async isGroupsAdjacent(digit: string, pass: string[]) {
+
+        const countNumbers = pass.filter(e => e == digit).length
+
+        return countNumbers <= 2 || countNumbers % 2 == 0
+    }
+
+    private async exceptionRepetition(pass: string[], index: number) {
+        const countRepetitionNumbersActual = pass.filter(e => e == pass[index]).length
+
+        // Aqui pego a repetição, se houver, do próximo número
+        const countRepetitionNextNumbers = pass.filter(e => e == pass[index + countRepetitionNumbersActual]).length
+
+        // aqui pego a repetição do dígito seguinte
+        const nextNumber = pass.filter(e => e == pass[index + 1]).length
+
+        // Se por acaso houver um número repetido sem um par, mas logo em seguida tiver um par, então entrará no caso de exceção à regra
+        return countRepetitionNextNumbers % 2 == 0 && pass[index + countRepetitionNumbersActual] || nextNumber % 2 == 0 && pass[index + countRepetitionNumbersActual]
+    }
+
+    private async isAdjacents(actual: string, next: string) {
+
+        const containDigits = actual && next
+
+        return containDigits && actual == next
+
     }
 }
