@@ -1,4 +1,4 @@
-export abstract class PassRangeOutput {
+export abstract class GeneralOutput {
 
     async response(data: any) {
         return {

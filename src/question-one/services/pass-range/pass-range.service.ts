@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { GeneralOutput } from '../../../data/outputs/general.output';
 import { IPassRangeType } from '../../../question-one/data/types/pass-range/ipass-range.type';
-import { PassRangeOutput } from '../../../question-one/data/types/pass-range/pass-range.output';
 import { AdditionalRules } from '../../../question-one/use-cases/pass-range/additional-rules';
 import { PassRangeUsecase } from '../../../question-one/use-cases/pass-range/pass-range.usecase';
 
 @Injectable()
-export class PassRangeService extends PassRangeOutput {
+export class PassRangeService extends GeneralOutput {
 
     constructor(private readonly usecase: PassRangeUsecase, private readonly usecaseAdditional: AdditionalRules) {
         super()

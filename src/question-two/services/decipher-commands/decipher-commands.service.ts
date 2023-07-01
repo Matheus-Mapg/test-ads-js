@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
+import { GeneralOutput } from '../../../data/outputs/general.output';
 import { MulterFile } from '../../../question-two/data/types/multer-file/multer-file.type';
 import { DecipherCommandsUseCase } from '../../../question-two/use-cases/decipher-commands/decipher-commands.usecase';
 
 @Injectable()
-export class DecipherCommandsService {
+export class DecipherCommandsService extends GeneralOutput {
 
-    constructor(private readonly usecase: DecipherCommandsUseCase) { }
+    constructor(private readonly usecase: DecipherCommandsUseCase) {
+        super()
+    }
 
     async decipher(file: MulterFile) {
 
@@ -13,11 +16,7 @@ export class DecipherCommandsService {
 
         const endereco = await this.usecase.executeCommands(commands)
 
-        return {
-            error: false,
-            message: 'sucess',
-            data: endereco
-        }
+        return this.response(endereco)
 
     }
 }
