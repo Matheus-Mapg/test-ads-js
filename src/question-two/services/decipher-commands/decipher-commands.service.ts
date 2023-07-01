@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { MulterFile } from 'src/question-two/data/types/multer-file/multer-file.type';
-import { DecipherCommandsUseCase } from 'src/question-two/use-cases/decipher-commands/decipher-commands.usecase';
+import { MulterFile } from '../../../question-two/data/types/multer-file/multer-file.type';
+import { DecipherCommandsUseCase } from '../../../question-two/use-cases/decipher-commands/decipher-commands.usecase';
 
 @Injectable()
 export class DecipherCommandsService {

@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { readFile, unlink, writeFile } from 'fs/promises';
 import { cwd } from 'process';
-import { MulterFile } from 'src/question-two/data/types/multer-file/multer-file.type';
+import { MulterFile } from '../../../question-two/data/types/multer-file/multer-file.type';
 import { DecipherCommandsUseCase } from './decipher-commands.usecase';
 
 describe('DecipherCommands', () => {
